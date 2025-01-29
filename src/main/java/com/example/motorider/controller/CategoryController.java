@@ -23,14 +23,11 @@ public class CategoryController {
 
     @GetMapping("get-all")
     public List<CategoryResponseDto> getAllOrders() {
-
         return categoryService.getAllCategory();
-
     }
 
     @PutMapping("/update/{id}")
     public String updateOrder(@RequestBody CategoryRequestDto categoryRequestDto, @PathVariable Long id) {
-
         return categoryService.updateCategory(categoryRequestDto, id);
     }
 

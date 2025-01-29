@@ -3,6 +3,8 @@ package com.example.motorider.controller;
 import com.example.motorider.dto.request.OrderRequestDto;
 import com.example.motorider.dto.response.OrderResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.motorider.service.OrderService;
 
@@ -30,9 +32,9 @@ public class OrderController {
     }
 
     @PutMapping("/update/{id}")
-    public String updateOrder(@RequestBody OrderRequestDto orderRequestDto, @PathVariable Long id) {
-
-        return orderService.UpdateOrder(orderRequestDto, id);
+    public ResponseEntity<String> updateOrder(@RequestBody OrderRequestDto orderRequestDto, @PathVariable Long id) {
+        String result = orderService.UpdateOrder(orderRequestDto, id);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     @DeleteMapping("/delete/{id}")

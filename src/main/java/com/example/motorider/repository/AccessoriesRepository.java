@@ -1,6 +1,6 @@
 package com.example.motorider.repository;
 
-import com.example.motorider.entitiy.Accessories;
+import com.example.motorider.entity.Accessories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

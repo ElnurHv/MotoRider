@@ -2,10 +2,11 @@ package com.example.motorider.service;
 
 import com.example.motorider.dto.request.OrderRequestDto;
 import com.example.motorider.dto.response.OrderResponseDto;
-import com.example.motorider.entitiy.Customer;
-import com.example.motorider.entitiy.Orders;
-import com.example.motorider.entitiy.Product;
+import com.example.motorider.entity.Customer;
+import com.example.motorider.entity.Orders;
+import com.example.motorider.entity.Product;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import com.example.motorider.repository.CustomerRepository;
@@ -14,6 +15,7 @@ import com.example.motorider.repository.ProductRepository;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderService {
@@ -21,10 +23,11 @@ public class OrderService {
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
+    private final EmailService emailService;
 
 
     public String createOrder(OrderRequestDto orderRequestDto) {
-        Orders orders = modelMapper.map(orderRequestDto, Orders.class);
+        Orders orders = new Orders();
         Customer customer = customerRepository.findById(orderRequestDto.getCustomerId()).orElseThrow();
 
         List<Long> productIds = orderRequestDto.getProductIds();
@@ -32,7 +35,14 @@ public class OrderService {
 
         orders.setCustomer(customer);
         orders.setProducts(list);
+        orders.setTotalPrice(orderRequestDto.getTotalPrice());
+        orders.setOrderDate(orderRequestDto.getOrderDate());
         orderRepository.save(orders);
+
+
+        log.info("Order created" + orders);
+
+        emailService.sendOrderConfirmation(String.valueOf(orders));
         return "Order created";
 
     }

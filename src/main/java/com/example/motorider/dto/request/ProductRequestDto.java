@@ -9,6 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
+
 public class ProductRequestDto {
     private String name;
     private String description;

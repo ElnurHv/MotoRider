@@ -2,25 +2,19 @@ package com.example.motorider.controller;
 
 import com.example.motorider.dto.request.ProductRequestDto;
 import com.example.motorider.dto.response.ProductResponseDto;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.example.motorider.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import com.example.motorider.service.ProductService;
 
 import java.util.List;
 
 @RestController
-
-
 @RequestMapping("/api/v1/product")
+@RequiredArgsConstructor
 public class ProductController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
 
     @PostMapping("/create")
     public String createProduct(@RequestBody ProductRequestDto productRequestDto) {
@@ -59,11 +53,11 @@ public class ProductController {
 
     @GetMapping("/by-name")
     public List<ProductRequestDto> getProductsByName(@RequestParam String name) {
-    return productService.getProductByName(name);
+        return productService.getProductByName(name);
     }
 
     @GetMapping("/last-added")
-    public List<ProductRequestDto> getLastAddedProducts() {
+    public List<ProductResponseDto> getLastAddedProducts() {
         return productService.getLastAdded();
     }
 

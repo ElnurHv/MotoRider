@@ -2,9 +2,9 @@ package com.example.motorider.service;
 
 import com.example.motorider.dto.request.ProductRequestDto;
 import com.example.motorider.dto.response.ProductResponseDto;
-import com.example.motorider.entitiy.Category;
-import com.example.motorider.entitiy.MotorcycleType;
-import com.example.motorider.entitiy.Product;
+import com.example.motorider.entity.Category;
+import com.example.motorider.entity.MotorcycleType;
+import com.example.motorider.entity.Product;
 import com.example.motorider.repository.CategoryRepository;
 import com.example.motorider.repository.MotorcycleTypeRepository;
 import com.example.motorider.repository.ProductRepository;
@@ -23,6 +23,7 @@ public class ProductService {
     private final ModelMapper modelMapper;
     private final MotorcycleTypeRepository motorcycleTypeRepository;
     private final CategoryRepository categoryRepository;
+
 
 
     public String createProduct(ProductRequestDto productRequestDto) {
@@ -47,9 +48,8 @@ public class ProductService {
     }
 
     public List<ProductResponseDto> getAllProducts() {
-        List<Product> products = productRepository.findAll();
-        List<ProductResponseDto> productResponseDtos = products.stream().map(p -> modelMapper.map(p, ProductResponseDto.class)).toList();
-        return productResponseDtos;
+        List<Product> products = productRepository.findAllByQuantityGreaterThan(0);
+        return products.stream().map(p -> modelMapper.map(p, ProductResponseDto.class)).toList();
     }
 
 
@@ -70,8 +70,8 @@ public class ProductService {
         return productRepository.findByPriceGreaterThan(price).stream().map(g -> modelMapper.map(g, ProductRequestDto.class)).toList();
     }
 
-    public List<ProductRequestDto> getLastAdded(){
-        return productRepository.findByOrderByCreatedDateTime().stream().map(p -> modelMapper.map(p, ProductRequestDto.class)).toList();
+    public List<ProductResponseDto> getLastAdded(){
+        return productRepository.findByOrderByCreatedDateTime().stream().map(p -> modelMapper.map(p, ProductResponseDto.class)).toList();
     }
 
 

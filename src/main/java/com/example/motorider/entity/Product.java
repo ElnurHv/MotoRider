@@ -1,4 +1,4 @@
-package com.example.motorider.entitiy;
+package com.example.motorider.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,6 +28,10 @@ public class Product {
     @CreationTimestamp
     private LocalDateTime createdDateTime;
 
+
+
+
+
     @ManyToOne
     @JoinColumn(name = "motorcycle_id")
     private MotorcycleType motorcycleType;
@@ -41,4 +45,18 @@ public class Product {
     )
     private List<Category> categories;
 
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", createdDateTime=" + createdDateTime +
+                ", motorcycleType=" + motorcycleType +
+                ", categories=" + categories +
+                '}';
+    }
 }

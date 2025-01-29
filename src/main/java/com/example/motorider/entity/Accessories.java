@@ -1,4 +1,4 @@
-package com.example.motorider.entitiy;
+package com.example.motorider.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,19 +7,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="cart")
+@Table(name="accessories")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cart {
+public class Accessories  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
-    private Orders order;
+    private String name;
+    private String description;
 
-    @OneToOne
-    private Customer customer;
+
 }

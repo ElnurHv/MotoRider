@@ -2,9 +2,9 @@ package com.example.motorider.service;
 
 import com.example.motorider.dto.request.CartRequestDto;
 import com.example.motorider.dto.response.CartResponseDto;
-import com.example.motorider.entitiy.Cart;
-import com.example.motorider.entitiy.Customer;
-import com.example.motorider.entitiy.Orders;
+import com.example.motorider.entity.Cart;
+import com.example.motorider.entity.Customer;
+import com.example.motorider.entity.Orders;
 import com.example.motorider.repository.CartRepository;
 import com.example.motorider.repository.CustomerRepository;
 import com.example.motorider.repository.OrderRepository;

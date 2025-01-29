@@ -1,4 +1,4 @@
-package com.example.motorider.entitiy;
+package com.example.motorider.entity;
 
 public interface Sellable {
      double getPrice();

@@ -1,10 +1,12 @@
-package com.example.motorider.entitiy;
+package com.example.motorider.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,11 +23,23 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+   @CreationTimestamp
     private LocalDateTime orderDate;
     private BigDecimal totalPrice;
 
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "orderDate=" + orderDate +
+                ", totalPrice=" + totalPrice +
+                ", id=" + id +
+                ", customer=" + customer +
+                ", products=" + products +
+                '}';
+    }
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "customer_id")
     private Customer customer;
 

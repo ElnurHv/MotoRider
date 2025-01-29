@@ -2,7 +2,7 @@ package com.example.motorider.service;
 
 import com.example.motorider.dto.request.CustomerRequestDto;
 import com.example.motorider.dto.response.CustomerResponseDto;
-import com.example.motorider.entitiy.Customer;
+import com.example.motorider.entity.Customer;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

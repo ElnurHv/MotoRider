@@ -1,4 +1,4 @@
-package com.example.motorider.entitiy;
+package com.example.motorider.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
